@@ -126,6 +126,9 @@ export class RunViewImpl extends Component {
     const entryPointName = Utils.getEntryPointName(tags);
     const backend = Utils.getBackend(tags);
     if (Utils.getSourceType(tags) === 'PROJECT') {
+      if (sourceName.includes('@')) {
+        sourceName = sourceName.split('@')[1]
+      }
       runCommand = 'mlflow run ' + shellEscape(sourceName);
       if (sourceVersion && sourceVersion !== 'latest') {
         runCommand += ' -v ' + shellEscape(sourceVersion);
